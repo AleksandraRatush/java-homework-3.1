@@ -10,10 +10,10 @@ class RadioTest {
     void nextStation() {
         Radio radio = new Radio();
         radio.nextStation();
-        assertEquals(radio.getStation(), 1);
-        radio.setStation((byte) 9);
+        assertEquals(1, radio.getStation());
+        radio.setStation(radio.getStationCount());
         radio.nextStation();
-        assertEquals(radio.getStation(), 0);
+        assertEquals(0, radio.getStation());
 
     }
 
@@ -21,23 +21,23 @@ class RadioTest {
     void prevStation() {
         Radio radio = new Radio();
         radio.prevStation();
-        assertEquals(radio.getStation(), 9);
+        assertEquals(radio.getStationCount(), radio.getStation());
         radio.setStation((byte) 2);
         radio.prevStation();
-        assertEquals(radio.getStation(), 1);
+        assertEquals(1, radio.getStation());
     }
 
     @Test
     void increaseVolume() {
         Radio radio = new Radio();
         radio.increaseVolume();
-        assertEquals(radio.getVolume(), 1);
+        assertEquals(1, radio.getVolume());
         int i = 0;
-        while (i < 10) {
+        while (i < 100) {
           radio.increaseVolume();
           i++;
         }
-        assertEquals(radio.getVolume(), 10);
+        assertEquals(100, radio.getVolume());
     }
 
     @Test
@@ -63,7 +63,7 @@ class RadioTest {
         assertEquals(radio.getStation(), 5);
         radio.setStation((byte) -1);
         assertEquals(radio.getStation(), 5);
-        radio.setStation((byte) 10);
+        radio.setStation((byte)( radio.getStationCount() + 1));
         assertEquals(radio.getStation(), 5);
         radio.setStation((byte) 0);
         assertEquals(radio.getStation(), 0);

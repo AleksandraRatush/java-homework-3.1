@@ -8,12 +8,28 @@ public class Radio {
 
   private byte station;
   private byte volume;
+  private final byte stationCount;
+
+  public Radio() {
+    stationCount = 10;
+  }
+
+  public Radio(byte stationCount) {
+    this.stationCount = stationCount;
+  }
+
+  /**
+   * Получение кол-ва станций.
+   */
+  public byte getStationCount() {
+    return stationCount;
+  }
 
   /**
   * Переключение на следующую станцию.
   */
   public void nextStation() {
-    if (station == 9) {
+    if (station == stationCount) {
       station = 0;
     } else {
       station++;
@@ -25,7 +41,7 @@ public class Radio {
   */
   public void prevStation() {
     if (station == 0) {
-      station = 9;
+      station = stationCount;
     } else {
       station--;
     }
@@ -35,7 +51,7 @@ public class Radio {
   * Уменьшение громкости.
   */
   public void increaseVolume() {
-    if (volume < 10) {
+    if (volume < 100) {
       volume++;
     }
   }
@@ -62,7 +78,7 @@ public class Radio {
   * @param station - номер станции.
   */
   public void setStation(byte station) {
-    if (station >= 0 && station <= 9) {
+    if (station >= 0 && station <= stationCount) {
       this.station = station;
     }
   }
